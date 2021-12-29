@@ -77,7 +77,7 @@ hold on
 plot(time,x_k_filter_SteadyState(2,:));
 hold on
 plot(time,x_k_predictor_SteadyState(2,:));
-legend('Euler Approximation lpf', 'Dataset', 'Kalman Filter', 'Kalman Predictor', 'Kalman Smoother', 'Kalman Steady-state Filter', 'Kalman Steady-state Predictor' );
+legend('Euler Approximation lpf', 'Dataset', 'Kalman Filter', 'Kalman Predictor', 'Kalman Smoother','Kalman Steady-state Filter', 'Kalman Steady-state Predictor' );
 title('Velocity');xlabel('Time'); ylabel('Velocity');
 
 % Acceleration

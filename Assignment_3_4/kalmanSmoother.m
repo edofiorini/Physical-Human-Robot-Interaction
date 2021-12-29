@@ -66,7 +66,7 @@ function [x_k_s] = kalmanSmoother(y_k_1, A, C, R, Q, x0, P0)
             K_k = data(i).P_k_f*A'*inv(data(i).P_k_1_f);
             
             % Smoothing state 
-            x_k_s(:,i) = x_k_f(:,i) + K_k*(x_k_s(:,i+1) - x_k_predictor_f(:,i));
+            x_k_s(:,i) = x_k_f(:,i) + K_k*(x_k_s(:,i+1) - x_k_predictor_f(:,i+1));
             
             % Smoothing covariance
             P_k = data(i).P_k_f + K_k*(P_k_1_N - data(i).P_k_1_f );

@@ -1,7 +1,6 @@
-%% Simulink parameters
-%four channel bilateral teleoperation architecture with local force feedback
-
-clear all; close all; clc;
+% Sample parameters for four channel bilateral teleoperation
+clear all;
+close all;
 
 % Input function parameter (sin or step with low pass filter)
 A = 1;
@@ -12,8 +11,8 @@ Fip = 1;
 Fc = 1; 
 
 % Human intention controller (PI)
-Ph = 20000;
-Dh = 100;
+Ph = 100000;
+Dh = 200;
 
 % Master controller
 Bm = 0.8;
@@ -42,15 +41,12 @@ Kh = 2000;
 % Environment impedance parameters
 Je = 0;
 Be = 0; %100;
-Ke = 20; % Change it to have a better response
+Ke = 200;
 
-% Local force feedback
-Cmf = 0.6;
-Csf = 0.6;
 Ts = 0.001;
 
 % High frequency pole
-tau = 10000;
+tau = 100000;
 
 s = tf('s');
 Zm = Mm*s+Dm;
@@ -58,14 +54,16 @@ Zs = Ms*s+Ds;
 Cm = (Bm*s+Km)/s;
 Cs = (Bs*s+Ks)/s;
 C4 = -(Mm*s^2+(Bm+Dm)*s+Km)/s;
-C2 = 1 + Cmf;
+C2 = 1;
 C1 = (Ms*s^2+(Bs+Ds)*s+Ks)/s;
-C3 = 1 + Csf;
+C3 = 1;
+D = 1/(C1+C3*Zm+C3*Cm);
 
-Zcm = (Mm*s^2+(Bm+Dm)*s+Km)/s;
-Zcs = (Ms*s^2+(Bs+Ds)*s+Ks)/s;
+H11 = (Zm+Cm)*D*(Zs+Cs-C3*C4)+C4
+H12 = -(Zm+Cm)*D*(1-C3*C2)-C2
+H21 = minreal(D*(Zs+Cs-C3*C4))
+H22 = -D*(1-C3*C2)
 
-H11 = (Zcm*Zcs + C1*C4)/((1+Cmf)*Zcs - C3*C4);
-H12 = (C2*Zcs - C4*(1+ Csf))/ ((1 + Cmf)*Zcs - C3*C4);
-H21 = -((C3*Zcm + C1*(1 + Cmf))/((1 + Cmf)*Zcs - C3*C4));
-H22 = ((1+ Csf)*(1+Cmf) - C2*C3)/((1+Cmf)*Zcs - C3*C4);
+Zwidth = (H12*H21 - H11*H22) / (H22*H21)
+
+% G = w_n^2/(s^2+2*w_n*xi*s+w_n^2)

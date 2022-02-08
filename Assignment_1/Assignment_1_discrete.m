@@ -4,10 +4,10 @@
 clear all; close all; clc;
 
 % Input function parameter (sin or step with low pass filter)
-A = 1;
+Amp = 1;
 
 % Low pass frequency cuff off
-Fip = 1;
+Fip = 10;
 % Sin frequency
 Fc = 1; 
 
@@ -50,7 +50,20 @@ Ke = 200;
 Ts = 0.001;
 
 % High frequency pole
-tau = 10000;
+tau = 100000;
+
+% Kalman
+A = [ 1 Ts Ts^2/2
+      0  1  Ts
+      0  0   1     ];
+
+C = [1 0 0];
+B = [Ts^3/6; Ts^2/2; Ts];
+x0 = [0 0];
+
+q = 10000000;
+R = 1;
+Q = q*B*B';
 
 s = tf('s');
 Zm = Mm*s+Dm;

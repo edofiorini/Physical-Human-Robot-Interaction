@@ -1,7 +1,7 @@
-function [beta] = leastSquare(position, velocity, voltage)
+function [beta] = leastSquare(velocity, acceleration, voltage)
 
        Y = voltage';
-       X = [velocity', position'];
+       X = [acceleration', velocity'];
        
        beta = inv(X'*X)*X'*Y;
        

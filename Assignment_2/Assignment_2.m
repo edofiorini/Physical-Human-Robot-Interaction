@@ -12,16 +12,16 @@ Fip = 1;
 Fc = 1; 
 
 % Human intention controller (PI)
-Ph = 20000;
+Ph = 200000;
 Dh = 100;
 
 % Master controller
-Bm = 0.8;
-Km = 1;
+Bm = 0.8*100;
+Km = 1*100;
 
 % Slave controller
-Bs = 0.8*4;
-Ks = 4;
+Bs = 0.8*4*2;
+Ks = 4*2;
 
 % Intertia of robot dynamics
 Mm = 0.5;

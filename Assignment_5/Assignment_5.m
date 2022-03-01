@@ -33,48 +33,55 @@ P0 = [1e-4 0   0
 
  % Estimate the velocity and acceleration to estimate the dc motor
  % parameters
-[x_k_filter] = kalmanFilter(position_master, A, C, R, Q, x0, P0);
+%[x_k_filter] = kalmanFilter(position_master, A, C, R, Q, x0, P0);
+[x_k_filter] = kalmanSmoother(position_master, A, C, R, Q, x0, P0);
 
 initialBeta = [0; 0];
-initialP = [ 0.1 0
-             0 0.1 ];
+initialP = [ 0.01 0
+             0 0.01 ];
 g = 0.005;
 
-lambda = 0.99;
+lambda = 0.95;
+
+%
+% load 'x_k_filter'
+% x_k_filter = estimate_s;
+% voltage_master = voltage_master(2:end);
+% time = time(2:end);
+voltage_master = lowPassFilter(voltage_master, 1, Ts);
 
 [beta_LS] = leastSquare(x_k_filter(2,:), x_k_filter(3,:), voltage_master);
-[beta_RLS] = recursiveLeastSquare(x_k_filter(2,:), x_k_filter(3,:), voltage_master, initialBeta, initialP, lambda);
+[beta_RLS, prediction_RLS] = recursiveLeastSquare(x_k_filter(2,:), x_k_filter(3,:), voltage_master, initialBeta, initialP, lambda);
 [beta_AA] = adaptiveAlgorithm(x_k_filter(2,:), x_k_filter(3,:), voltage_master, initialBeta, g, Ts);
 
 % Least square prediction in trainig
-prediction_LS = [x_k_filter(2,:)', x_k_filter(3,:)']*beta_LS;
+prediction_LS = [x_k_filter(3,:)', x_k_filter(2,:)']*beta_LS;
 figure(1)
 plot(time,prediction_LS)
 hold on
-plot(time, lowPassFilter(voltage_master, 5, Ts))
+plot(time, voltage_master)
 title('Least Square');xlabel('Time'); ylabel('Voltage');
 legend('Prediction', 'Dataset');
 
 % Recursive Least square prediction in trainig
-prediction_RLS = [x_k_filter(2,:)', x_k_filter(3,:)']*beta_RLS;
 figure(2)
 plot(time,prediction_RLS)
 hold on
-plot(time, lowPassFilter(voltage_master, 5, Ts))
+plot(time, voltage_master)
 title('Recursive Least Square');xlabel('Time'); ylabel('Voltage');
 legend('Prediction', 'Dataset');
 
 % Recursive Least square prediction in trainig
-prediction_AA = [x_k_filter(2,:)', x_k_filter(3,:)']*beta_AA;
+prediction_AA = [x_k_filter(3,:)', x_k_filter(2,:)']*beta_AA;
 figure(3)
 plot(time,prediction_AA)
 hold on
-plot(time, lowPassFilter(voltage_master, 5, Ts))
+plot(time, voltage_master)
 title('Adaptive Algorithm');xlabel('Time'); ylabel('Voltage');
 legend('Prediction', 'Dataset');
 
 figure(4)
-plot(time, lowPassFilter(voltage_master, 5, Ts))
+plot(time, voltage_master)
 hold on
 plot(time,prediction_LS)
 hold on

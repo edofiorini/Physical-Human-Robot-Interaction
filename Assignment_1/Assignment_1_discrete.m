@@ -1,6 +1,9 @@
 %% Simulink parameters
 % four channel bilateral teleoperation architecture
 
+% TODO settare i parametri giusti
+% KALMAN toglie rumore sulle forze, ma peggi oin riferimento -- second set
+% FIltro meglio in riferimento, ma peggio sul romore --- first set param
 clear all; close all; clc;
 
 % Input function parameter (sin or step with low pass filter)
@@ -12,19 +15,25 @@ Fip = 10;
 Fc = 1; 
 
 % Human intention controller (PI)
-Ph = 10000;
-Dh = 200;
+Ph = 13000;%4000;
+Dh = 700;%1000
+
+% Ph = 4000;
+% Dh = 1000;
 
 % Master controller
-Bm = 0.8;
-Km = 1;
+Bm = 100;%0.8;%*40;
+Km = 0;%1;%*40;
 
+% Bm = 0.8;
+% Km = 0;
 
 % Slave controller
-Bs = 0.8*4;
-Ks = 4;
+Bs = 100;%0.8*4;%*4;
+Ks = 0;%4;%*4;
 
-
+% Bs = 0.8*4;
+% Ks = 4;%*4;
 
 % Intertia of robot dynamics
 Mm = 0.5;
@@ -38,7 +47,7 @@ Dm = 0;
 Ds = 0;
 
 % Human impedance parameters
-Jh = 0.5;
+Jh = 1;
 Bh = 70;
 Kh = 2000;
 
@@ -50,18 +59,15 @@ Ke = 200;
 Ts = 0.001;
 
 % High frequency pole
-tau = 100000;
+tau = 10000;
 
 % Kalman
-A = [ 1 Ts Ts^2/2
-      0  1  Ts
-      0  0   1     ];
-
-C = [1 0 0];
-B = [Ts^3/6; Ts^2/2; Ts];
+A = [1 Ts
+    0 1];
+B = [Ts^2/2;Ts];
 x0 = [0 0];
-
-q = 10000000;
+C = [1 0];
+q = 10000;
 R = 1;
 Q = q*B*B';
 

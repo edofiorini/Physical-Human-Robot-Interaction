@@ -6,21 +6,21 @@ close all;
 Amp = 1;
 
 % Low pass frequency cuff off
-Fip = 100;
+Fip = 10;
 % Sin frequency
 Fc = 0.5; 
 
 % Human intention controller (PI)
-Ih = 5; %10000;
-Ph = 5; %200;
+Ih = 1;%5; %10000;
+Ph = 2;%5; %200;
 
 % Master controller (PI)
-Bm = 100;
-Km = 50;
+Bm = 10;%100;
+Km = 15;%50;
 
 % Slave controller (PI)
-Bs = 100;
-Ks = 80;
+Bs = 15;%100;
+Ks = 10;%80;
 
 % Intertia of robot dynamics
 Mm = 0.5;
@@ -34,14 +34,14 @@ Dm = 0;
 Ds = 0;
 
 % Human impedance parameters
-Jh = 0;
-Bh = 1.5;
-Kh = 1; %2000;
+Jh = 0.05;% 0;
+Bh = 1.5;%1.5;
+Kh = 200; %1; %2000;
 
 % Environment impedance parameters
 Je = 0;
 Be = 10; %100;
-Ke = 10;%200;
+Ke = 200;%10;%200;
 
 Ts = 0.001;
 

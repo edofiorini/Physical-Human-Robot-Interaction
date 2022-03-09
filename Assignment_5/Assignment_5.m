@@ -48,7 +48,7 @@ lambda = 0.95;
 % x_k_filter = estimate_s;
 % voltage_master = voltage_master(2:end);
 % time = time(2:end);
-voltage_master = lowPassFilter(voltage_master, 1, Ts);
+voltage_master = lowPassFilter(voltage_master, 5, Ts);
 
 [beta_LS] = leastSquare(x_k_filter(2,:), x_k_filter(3,:), voltage_master);
 [beta_RLS, prediction_RLS] = recursiveLeastSquare(x_k_filter(2,:), x_k_filter(3,:), voltage_master, initialBeta, initialP, lambda);

@@ -14,8 +14,6 @@ Fc = 0.5; %1;
 Ih = 2; %10000;
 Ph = 5; %200;
 
-
-
 % Slave controller (PI)
 Bs = 100;%90; (P term)
 Ks = 80;%40; (I term)
@@ -43,10 +41,16 @@ Ke = 200;%10;%200;
 
 Ts = 0.001;
 
+
 % High frequency pole
 tau = 100000;
-b =  1;
+beta =  0.1;
+H_D = 1;
+alpha = 0.1;
 delay = 1;
+
+H_init_m = 0;
+H_init_s = 0;
 
 % Kalman
 A = [1 Ts
@@ -54,6 +58,6 @@ A = [1 Ts
 B = [Ts^2/2;Ts];
 x0 = [0 0];
 C = [1 0];
-q = 10000000;
+q = 100000000;
 R = 1;
 Q = q*B*B';

@@ -21,9 +21,9 @@ Dh = 700;%1000
 % Ph = 4000;
 % Dh = 1000;
 
-% Master controller
-Bm = 100;%0.8;%*40;
-Km = 0;%1;%*40;
+% Master controller (PI in velocity)
+Bm = 100;%0.8;%*40; P
+Km = 0;%1;%*40;     I
 
 % Bm = 0.8;
 % Km = 0;

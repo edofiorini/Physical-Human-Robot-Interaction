@@ -3,7 +3,7 @@ clear all;
 close all;
 
 % Input function parameter (sin or step with low pass filter)
-Amp = 10;%0.5;
+Amp = 1;%0.5;
 
 % Low pass frequency cuff off
 Fip = 100;%1;
@@ -16,8 +16,8 @@ Ph = 5; %200;
 
 
 % Slave controller
-Bs = 100;%90;
-Ks = 80;%40;
+Bs = 100;%90; P
+Ks = 80;%40; I
 
 % Intertia of robot dynamics
 Mm = 0.5;

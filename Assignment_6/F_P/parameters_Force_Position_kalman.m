@@ -3,7 +3,7 @@ clear all;
 close all;
 
 % Input function parameter (sin or step with low pass filter)
-Amp= 1;%0.5;
+Amp = 1;%0.5;
 
 % Low pass frequency cuff off
 Fip = 100;%1;
@@ -15,10 +15,9 @@ Ih = 2; %10000;
 Ph = 5; %200;
 
 
-
-% Slave controller (PI)
-Bs = 100;%90; (P term)
-Ks = 80;%40; (I term)
+% Slave controller
+Bs = 100;%90;
+Ks = 80;%40;
 
 % Intertia of robot dynamics
 Mm = 0.5;
@@ -44,9 +43,13 @@ Ke = 200;%10;%200;
 Ts = 0.001;
 
 % High frequency pole
-tau = 100000;
-b =  1;
-delay = 1;
+tau = 1000000000;
+beta =  0.3;
+H_D = 10;
+alpha = 0.1;
+
+Hm_init = 10;
+Hs_init = 20;
 
 % Kalman
 A = [1 Ts
@@ -54,6 +57,6 @@ A = [1 Ts
 B = [Ts^2/2;Ts];
 x0 = [0 0];
 C = [1 0];
-q = 10000000;
+q = 100000000;
 R = 1;
 Q = q*B*B';

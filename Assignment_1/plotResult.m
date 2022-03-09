@@ -8,7 +8,7 @@ hold on
 plot(out.position.Time',out.position.Data(:,2)', 'LineWidth',1.8);
 hold on
 plot(out.position.Time',out.position.Data(:,3)', 'LineWidth',1.8);
-title('position');xlabel('Time');
+title('Position');xlabel('Time');
 legend('Reference', 'Master', 'Slave')
 subplot(3,1,2)
 plot(out.velocity.Time',out.velocity.Data(:,1)', 'LineWidth',1.8);

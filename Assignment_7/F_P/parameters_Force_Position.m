@@ -3,7 +3,7 @@ clear all;
 close all;
 
 % Input function parameter (sin or step with low pass filter)
-Amp = 10;%0.5;
+Amp = 1;%0.5;
 
 % Low pass frequency cuff off
 Fip = 100;%1;
@@ -11,13 +11,13 @@ Fip = 100;%1;
 Fc = 0.5; %1; 
 
 % Human intention controller (PI)
-Ih = 2; %10000;
-Ph = 5; %200;
+Ih = 2;% 50; %10000;
+Ph = 5; %50; %200;
 
 
 % Slave controller
-Bs = 100;%90;
-Ks = 80;%40;
+Bs = 100; %400;%100;%90;
+Ks = 80; %240; %80;%40;
 
 % Intertia of robot dynamics
 Mm = 0.5;
@@ -43,7 +43,11 @@ Ke = 200;%10;%200;
 Ts = 0.001;
 
 % High frequency pole
-tau = 100000;
-beta =  1;
-H_D = 10;
+%tau = 100000;
+beta =  0.1;
+H_D = 1;
 alpha = 0.1;
+delay = 1;
+
+H_init_m = 0;
+H_init_s = 0;

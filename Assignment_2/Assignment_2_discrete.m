@@ -19,9 +19,9 @@ Dh = 100;
 
 % Ph = 200;
 % Dh = 100;
-Master controller
-Bm = 0.8*180;
-Km = 1*180;
+% Master controller PI velocity
+Bm = 0.8*180; % P 
+Km = 1*180;   % I
 
 % Bm = 0.8*30;
 % Km = 1*30;

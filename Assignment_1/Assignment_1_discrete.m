@@ -10,7 +10,7 @@ clear all; close all; clc;
 Amp = 1;
 
 % Low pass frequency cuff off
-Fip = 10;
+Fip = 5;
 % Sin frequency
 Fc = 1; 
 

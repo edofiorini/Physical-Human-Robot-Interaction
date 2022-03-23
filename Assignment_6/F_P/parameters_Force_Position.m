@@ -45,4 +45,4 @@ Ts = 0.001;
 % High frequency pole
 tau = 100000;
 b =  1;
-delay = 1;
+delay = 10;

@@ -21,4 +21,4 @@ plot(out.force.Time',out.force.Data(:,1)', 'LineWidth',1.8);
 hold on
 plot(out.force.Time',out.force.Data(:,2)', 'LineWidth',1.8);
 title('Force');xlabel('Time');
-legend( 'Master', 'Slave')
+legend( 'Slave', 'Master')

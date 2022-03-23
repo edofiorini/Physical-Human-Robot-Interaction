@@ -16,12 +16,12 @@ Ph = 5; %200;
 
 
 % Master controller (PI)
-Bm = 250;
-Km = 80;
+Bm = 250; %P
+Km = 80; %I
 
 % Slave controller
-Bs = 200;
-Ks = 80;%40;
+Bs = 200; %P
+Ks = 80;%40; %I
 
 % Intertia of robot dynamics
 Mm = 0.5;
@@ -48,10 +48,10 @@ Ts = 0.001;
 
 % High frequency pole
 tau = 100000;
-beta =  0.3;
+beta =  0.1;
 H_D = 1;
 alpha = 0.1;
 delay = 1;
 
-H_init_m = 10;
+H_init_m = 1;
 H_init_s = 0;

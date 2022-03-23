@@ -44,12 +44,8 @@ Ts = 0.001;
 
 % High frequency pole
 tau = 1000000000;
-beta =  0.3;
-H_D = 10;
-alpha = 0.1;
-
-Hm_init = 10;
-Hs_init = 20;
+b =  1;
+delay = 1;
 
 % Kalman
 A = [1 Ts

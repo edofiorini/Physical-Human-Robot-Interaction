@@ -44,7 +44,7 @@ Ts = 0.001;
 
 % High frequency pole
 %tau = 100000;
-beta =  0.1;
+beta =  0.01;
 H_D = 1;
 alpha = 0.1;
 delay = 1;
